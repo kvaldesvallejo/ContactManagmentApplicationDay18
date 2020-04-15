@@ -46,22 +46,35 @@ const getState = ({ getStore, setStore }) => {
 					body: JSON.stringify({
 						full_name: name,
 						phone: phone,
+						email: email,
 						address: address,
 						agenda_slug: "kAgenda"
 					})
 				}).then(() => {
-					fetch(
-						url +
-							"agenda/kAgenda"
-								.then((response = response.json()))
-								.then(response => {
-									console.log("result: ", result),
-										setStore({
-											contacts: result
-										});
-								})
-								.catch(e => console.error(e))
-					);
+					fetch(url + "agenda/kAgenda")
+						.then(response => response.json())
+						.then(result => {
+							console.log("Get contact: ", result), setStore({ contacts: result });
+						})
+						.catch(e => console.error(e));
+				});
+			},
+			deleteContact(index) {
+				/*let store = scope.state.store;
+                id = store.contacts[index].id;*/
+				console.log(index);
+				fetch(url + index, {
+					method: "delete"
+				}).then(() => {
+					fetch(url + "agenda/kAgenda")
+						.then(response => response.json())
+						.then(result => {
+							console.log("Get contact: ", result),
+								setStore({
+									contacts: result
+								});
+						})
+						.catch(e => console.error(e));
 				});
 			}
 		}

@@ -6,7 +6,8 @@ import { Modal } from "../component/Modal";
 
 export const Contacts = () => {
 	const [state, setState] = useState({
-		showModal: false
+		showModal: false,
+		idModal: 0
 	});
 
 	return (
